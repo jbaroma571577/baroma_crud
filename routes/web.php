@@ -7,9 +7,9 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RiceController;
 
 
-// Public routes
+// Public routesgit status
 Route::get('/', function () {
-    return redirect('/production');
+    return redirect('/rice');
 });
 
 // Authentication routes
