@@ -5,11 +5,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RiceController;
-use Illuminate\Support\Facades\Route;
+
 
 // Public routes
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/production');
 });
 
 // Authentication routes
