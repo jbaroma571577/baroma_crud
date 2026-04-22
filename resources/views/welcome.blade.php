@@ -3,73 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rice Ordering System</title>
+    <title>Jake's Rice</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
+            font-family: Arial;
+            background: #f0f0f0;
+            padding: 50px;
             text-align: center;
-            background-color: white;
-            border: 1px solid #ddd;
-            padding: 30px;
-            max-width: 500px;
         }
-
+        
+        .container {
+            background: white;
+            padding: 40px;
+            max-width: 400px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+        }
+        
         h1 {
-            font-size: 2em;
             margin-bottom: 15px;
         }
-
+        
         p {
-            font-size: 1em;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: #666;
         }
-
+        
         .btn {
             display: inline-block;
             padding: 10px 20px;
             margin: 5px;
-            background-color: #007bff;
+            background: #007bff;
             color: white;
             text-decoration: none;
             border: 1px solid #007bff;
         }
-
+        
         .btn:hover {
-            background-color: #0056b3;
+            background: #0056b3;
             border-color: #0056b3;
         }
-
+        
         .btn-secondary {
-            background-color: white;
+            background: white;
             color: #333;
-            border: 1px solid #ddd;
+            border-color: #ddd;
         }
-
+        
         .btn-secondary:hover {
-            background-color: #f0f0f0;
+            background: #f0f0f0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Rice Ordering System</h1>
-        <p>Manage your rice products, orders, and payments in one place</p>
+        <h1>Jake's Rice</h1>
+        <p>Order fresh rice online</p>
 
         @auth
             <a href="{{ route('dashboard') }}" class="btn">Go to Dashboard</a>

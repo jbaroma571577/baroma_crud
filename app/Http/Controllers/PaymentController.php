@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
-    /**
-     * Display a listing of payments.
-     */
     public function index()
     {
         $payments = Payment::whereHas('order', function ($query) {
@@ -21,12 +18,8 @@ class PaymentController extends Controller
         return view('payments.index', compact('payments'));
     }
 
-    /**
-     * Show the form for processing payment.
-     */
     public function show(Order $order)
     {
-        // Check authorization
         if ($order->user_id !== Auth::id()) {
             abort(403);
         }
@@ -36,12 +29,8 @@ class PaymentController extends Controller
         return view('payments.show', compact('order', 'payment'));
     }
 
-    /**
-     * Process the payment.
-     */
     public function process(Request $request, Order $order)
     {
-        // Check authorization
         if ($order->user_id !== Auth::id()) {
             abort(403);
         }
@@ -63,7 +52,6 @@ class PaymentController extends Controller
             'payment_method' => $validated['payment_method'],
         ]);
 
-        // Update order status
         $order->update(['status' => 'completed']);
 
         return redirect()->route('payments.index')->with('success', 'Payment processed successfully!');

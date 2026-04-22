@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    /**
-     * Show the dashboard.
-     */
     public function index()
     {
         $totalOrders = Order::where('user_id', Auth::id())->count();

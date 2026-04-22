@@ -9,17 +9,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    /**
-     * Show the login form.
-     */
     public function showLogin()
     {
         return view('auth.login');
     }
 
-    /**
-     * Handle login request.
-     */
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -37,17 +31,11 @@ class AuthController extends Controller
         ]);
     }
 
-    /**
-     * Show the register form.
-     */
     public function showRegister()
     {
         return view('auth.register');
     }
 
-    /**
-     * Handle registration request.
-     */
     public function register(Request $request)
     {
         $validated = $request->validate([
@@ -67,9 +55,6 @@ class AuthController extends Controller
         return redirect('dashboard')->with('success', 'Account created successfully!');
     }
 
-    /**
-     * Handle logout request.
-     */
     public function logout(Request $request)
     {
         Auth::logout();
