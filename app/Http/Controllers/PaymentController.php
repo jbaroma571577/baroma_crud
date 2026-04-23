@@ -5,55 +5,50 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
+    // Show all payments
     public function index()
     {
-        $payments = Payment::whereHas('order', function ($query) {
-            $query->where('user_id', Auth::id());
-        })->with('order.riceItem')->get();
+        $payments = Payment::with('order.riceItem')->get();
 
         return view('payments.index', compact('payments'));
     }
 
-    public function show(Order $order)
+    // Show payment page
+    public function show(Payment $payment)
     {
-        if ($order->user_id !== Auth::id()) {
-            abort(403);
-        }
+        $order = $payment->order;
 
-        $payment = $order->payment;
-
-        return view('payments.show', compact('order', 'payment'));
+        return view('payments.process', compact('payment', 'order'));
     }
 
-    public function process(Request $request, Order $order)
+    // Process payment
+    public function process(Request $request, Payment $payment)
     {
-        if ($order->user_id !== Auth::id()) {
-            abort(403);
-        }
-
         $validated = $request->validate([
             'payment_method' => 'required|in:cash,card,online',
         ]);
 
-        $payment = $order->payment;
-
         if ($payment->status === 'paid') {
-            return back()->withErrors(['status' => 'This order has already been paid.']);
+            return back()->withErrors([
+                'status' => 'This payment has already been processed.'
+            ]);
         }
 
-        // Update payment
         $payment->update([
             'status' => 'paid',
             'payment_date' => now(),
             'payment_method' => $validated['payment_method'],
         ]);
 
-        $order->update(['status' => 'completed']);
+        $payment->order->update([
+            'status' => 'completed'
+        ]);
 
-        return redirect()->route('payments.index')->with('success', 'Payment processed successfully!');
+        return redirect()
+            ->route('payments.show', $payment)
+            ->with('success', 'Payment processed successfully!');
     }
 }

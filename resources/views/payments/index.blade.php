@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Payments')
+@section('title', 'Payment History')
 
 @section('content')
+
     <h2>Payment History</h2>
 
     @if ($payments->count() > 0)
@@ -17,6 +18,7 @@
                     <th>Actions</th>
                 </tr>
             </thead>
+
             <tbody>
                 @foreach ($payments as $payment)
                     <tr>
@@ -25,13 +27,23 @@
                         <td>{{ number_format($payment->amount, 2) }}</td>
                         <td>{{ ucfirst($payment->status) }}</td>
                         <td>{{ $payment->payment_date ? $payment->payment_date->format('M d, Y') : '-' }}</td>
-                        <td><a href="{{ route('payments.show', $payment->order) }}" class="btn btn-primary">View</a></td>
+
+                        <td>
+                            <a href="{{ route('payments.show', $payment) }}" class="btn btn-primary">
+                                View
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     @else
         <p>No payments yet.</p>
-        <p><a href="{{ route('orders.create') }}" class="btn btn-success">Create an Order</a></p>
+        <p>
+            <a href="{{ route('orders.create') }}" class="btn btn-success">
+                Create an Order
+            </a>
+        </p>
     @endif
+
 @endsection
