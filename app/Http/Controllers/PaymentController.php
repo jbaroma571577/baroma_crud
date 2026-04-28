@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    // Show all payments
+   
     public function index()
     {
         $payments = Payment::with('order.riceItem')->get();
@@ -16,7 +16,7 @@ class PaymentController extends Controller
         return view('payments.index', compact('payments'));
     }
 
-    // Show payment page
+   
     public function show(Payment $payment)
     {
         $order = $payment->order;
@@ -24,7 +24,7 @@ class PaymentController extends Controller
         return view('payments.process', compact('payment', 'order'));
     }
 
-    // Process payment
+   
     public function process(Request $request, Payment $payment)
     {
         $validated = $request->validate([
