@@ -26,25 +26,19 @@ class Order extends Model
         'total_amount' => 'decimal:2',
     ];
 
-    /**
-     * Get the user associated with this order.
-     */
+    
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Get the rice item associated with this order.
-     */
+    
     public function riceItem()
     {
         return $this->belongsTo(RiceItem::class);
     }
 
-    /**
-     * Get the payment associated with this order.
-     */
+    
     public function payment()
     {
         return $this->hasOne(Payment::class);
