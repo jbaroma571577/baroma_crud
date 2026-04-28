@@ -45,7 +45,7 @@ class OrderController extends Controller
             'status' => 'pending',
         ]);
 
-        // Reduce stock
+        
         $riceItem->update([
             'stock_quantity' => $riceItem->stock_quantity - $validated['quantity'],
         ]);
