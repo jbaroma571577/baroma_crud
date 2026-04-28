@@ -22,9 +22,7 @@ class RiceItem extends Model
         'price_per_kg' => 'decimal:2',
     ];
 
-    /**
-     * Get the orders associated with this rice item.
-     */
+    
     public function orders()
     {
         return $this->hasMany(Order::class);
